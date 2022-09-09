@@ -7,12 +7,12 @@ public class RentalService {
 
     private Double pricePerHour;
     private Double pricePerDay;
-    private BrazilTaxService tax;
+    private TaxService taxService;
 
-    public RentalService(Double pricePerHour, Double pricePerDay, BrazilTaxService tax) {
+    public RentalService(Double pricePerHour, Double pricePerDay, TaxService taxService) {
         this.pricePerHour = pricePerHour;
         this.pricePerDay = pricePerDay;
-        this.tax = tax;
+        this.taxService = taxService;
     }
 
     public void processInvoice(CarRental carRental) {
@@ -22,12 +22,12 @@ public class RentalService {
         if (duration <= 12) {
             int durationHours = (int) Math.ceil(duration);
             double basicPayment = durationHours * pricePerHour;
-            Invoice invoice = new Invoice(basicPayment, tax.tax(basicPayment));
+            Invoice invoice = new Invoice(basicPayment, taxService.tax(basicPayment));
             carRental.setInvoice(invoice);
         } else {
             int durationDays = (int) Math.ceil(duration/24);
             double basicPayment = durationDays * pricePerDay;
-            Invoice invoice = new Invoice(basicPayment, tax.tax(basicPayment));
+            Invoice invoice = new Invoice(basicPayment, taxService.tax(basicPayment));
             carRental.setInvoice(invoice);
         }
     }

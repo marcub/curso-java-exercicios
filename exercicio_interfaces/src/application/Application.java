@@ -4,6 +4,7 @@ import entities.CarRental;
 import entities.Vehicle;
 import services.BrazilTaxService;
 import services.RentalService;
+import services.UsaTaxService;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
